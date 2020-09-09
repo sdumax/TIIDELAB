@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS file</title>
+    <style>
+      body {
+        background: rgb(238, 226, 226);
+      }
+      button {
+        border: none;
+      }
+      h1 {
+        text-align: center;
+        margin: 5rem auto;
+        color: #0684ad;
+        font-size: 48px;
+        font-family: "Courier New", Courier, monospace;
+      }
+      .container {
+        margin: 2rem auto;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+      }
+      .btn {
+        padding: 0.3rem 0.5rem;
+        border-radius: 3%;
+        margin-right: 4rem;
+        width: 7rem;
+        height: 2.5rem;
+        color: #0099cc;
+        background-color: transparent;
+        border: 1px solid #0099cc;
+      }
+      .btn:hover {
+        background-color: #0099cc;
+        border: none;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>JS Assignment</h1>
+    <div class="container">
+      <button class="btn" onclick="recharge()">Recharge Instant</button>
+    </div>
+    <script>
+      const recharge = () => {
+        //prompt user
+        let userOption = "Welcome to BASCOM Transact recharge\n";
+        userOption += "please select type of recharge\n";
+        userOption += "1. Airtime - self\n";
+        userOption += "2. Airtime - others\n";
+        userOption += "3. Data\n";
+        userOption += "4. Transfer";
+
+        let userVal = Number(prompt(userOption));
+        // airtime self
+        if (userOption > 4 || userOption < 1) {
+          userVal;
+        }
+
+        if (userVal == 1) {
+          let userAmt = Number(prompt("please enter amount"));
+          let verify = confirm(
+            "You are about to recharge " + userAmt + " are you sure about this?"
+          );
+          if (verify == 1) {
+            let userPin = Number(
+              prompt("please enter your transaction pin\n Default pin: 1234")
+            );
+          } else {
+            break;
+          }
+
+          if (userPin != 1234) {
+            let userPin = Number(
+              prompt("please enter valid transaction pin\n Default pin: 1234")
+            );
+          } else {
+            alert("Please wait\n Loading...");
+            alert(
+              "recharge of " +
+                userAmt +
+                " successful.\n Thank you for choosing BASCOM Transact"
+            );
+          }
+        } else if (userVal == 2) {
+          let userOption = "Please select network\n";
+          userOption += "1. 9-mobile\n";
+          userOption += "2. Glo\n";
+          userOption += "3. Airtel\n";
+          userOption += "4. MTN\n";
+          userOption += "5. others";
+
+          let userServe = Number(prompt(userOption));
+
+          if (userServe > 5 || userServe < 1) {
+            let userOption = "Please select network\n";
+            userOption += "1. 9-mobile\n";
+            userOption += "2. Glo\n";
+            userOption += "3. Airtel\n";
+            userOption += "4. MTN\n";
+            userOption += "5. others";
+            let userServe = Number(prompt(userOption));
+          }
+
+          let userNum = Number(prompt("please the phone number"));
+          let userAmt = Number(prompt("please enter amount"));
+
+          let userPin = Number(
+            prompt("please enter your transaction pin\n Default pin: 1234")
+          );
+          if (userPin != 1234) {
+            let userPin = Number(
+              prompt("please enter valid transaction pin\n Default pin: 1234")
+            );
+          } else {
+            alert("Please wait\n Loading...");
+            alert(
+              "recharge of " +
+                userAmt +
+                " is successful.\n Thank you for choosing BASCOM Transact"
+            );
+          }
+        } else if (userVal == 3) {
+          let userOption = "Please select network\n";
+          userOption += "1. 9-mobile\n";
+          userOption += "2. Glo\n";
+          userOption += "3. Airtel\n";
+          userOption += "4. MTN\n";
+          userOption += "5. others";
+
+          let userServe = Number(prompt(userOption));
+
+          if (userServe > 5 || userServe < 1) {
+            let userOption = "Please select network\n";
+            userOption += "1. 9-mobile\n";
+            userOption += "2. Glo\n";
+            userOption += "3. Airtel\n";
+            userOption += "4. MTN\n";
+            userOption += "5. others";
+            let userServe = Number(prompt(userOption));
+          }
+
+          let userNum = Number(prompt("please the phone number"));
+          let userAmt = Number(prompt("please enter amount"));
+
+          let userPin = Number(
+            prompt("please enter your transaction pin\n Default pin: 1234")
+          );
+          if (userPin != 1234) {
+            let userPin = Number(
+              prompt("please enter valid transaction pin\n Default pin: 1234")
+            );
+          } else {
+            alert("Please wait\n Loading...");
+            alert(
+              "recharge of " +
+                userAmt +
+                " is successful.\n Thank you for choosing BASCOM Transact"
+            );
+          }
+        } else {
+          let transfer = alert(
+            "You will be referred to a different channel to transfer. Thank you"
+          );
+        }
+      };
+    </script>
+  </body>
+</html>
