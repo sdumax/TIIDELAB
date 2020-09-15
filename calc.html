@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS file</title>
+    <style>
+      body {
+        background: rgb(238, 226, 226);
+      }
+      button {
+        border: none;
+      }
+      h1 {
+        text-align: center;
+        margin: 5rem auto;
+        color: #0684ad;
+        font-size: 48px;
+        font-family: "Courier New", Courier, monospace;
+      }
+      .container {
+        margin: 2rem auto;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+      }
+      .btn {
+        padding: 0.2rem 0.5rem;
+        border-radius: 3%;
+        margin-right: 4rem;
+        width: 7rem;
+        height: 2rem;
+        color: #0099cc;
+        background-color: transparent;
+        border: 1px solid #0099cc;
+      }
+      .btn:hover {
+        background-color: #0099cc;
+        border: none;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Quick Calculate</h1>
+    <div class="container">
+      <button class="btn" onclick="add()">Add</button>
+      <button class="btn" onclick="subtract()">Subtract</button>
+      <button class="btn" onclick="divide()">Divide</button>
+      <button class="btn" onclick="multiply()">Multiply</button>
+    </div>
+    <script>
+      var firstNumber = null;
+      var secondNumber = null;
+      var num1 = null;
+      var num2 = null;
+      const promptUser = (text) => {
+        value = Number(prompt(`please enter the ${text} number:`));
+        return value;
+        // if (value === null) {
+
+        // }
+      };
+
+      // check user input
+      const checkNum1 = () => {
+        do {
+          num1 = promptUser("first");
+        } while (num1 == isNaN() || num1 == "");
+        return (firstNumber = num1);
+      };
+      const checkNum2 = () => {
+        do {
+          num2 = promptUser("second");
+        } while (num2 == isNaN(0, 9) || num2 == "");
+        return (secondNumber = num2);
+      };
+
+      const checkNum = () => {
+        /**
+         * This function performs a check and returns the users' numbers
+         */
+        checkNum1();
+        checkNum2();
+      };
+
+      // perform calculation using operand
+      /**
+       * This function performs a calculation using
+       * the numbers and an operand
+       */
+      const calc = (num1, num2, operator) => {
+        // run calc.
+        var value = null;
+        if (operator == "+") {
+          value = num1 + num2;
+        } else if (operator == "-") {
+          value = num1 - num2;
+        } else if (operator == "/") {
+          value = num1 / num2;
+        } else if (operator == "*") {
+          value = num1 * num2;
+        }
+        let ans = `${num1} ${operator} ${num2} = ${value}`;
+        alert(ans);
+      };
+
+      // addition
+      const add = () => {
+        checkNum();
+        calc(firstNumber, secondNumber, "+");
+      };
+      // multiply
+      const multiply = () => {
+        checkNum();
+        calc(firstNumber, secondNumber, "*");
+      };
+      // subtract
+      const subtract = () => {
+        checkNum();
+        calc(firstNumber, secondNumber, "-");
+      };
+      // divide
+      const divide = () => {
+        checkNum();
+        calc(firstNumber, secondNumber, "/");
+      };
+    </script>
+  </body>
+</html>
