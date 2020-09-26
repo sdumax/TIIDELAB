@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Array lessons</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>sign up from</h1>
+      <div class="form-group">
+        <form class="form" id="submitForm">
+          <input type="hidden" id="index" name="" />
+
+          <input
+            type="text"
+            placeholder="enter full name"
+            name="name"
+            id="fullname"
+            required
+          />
+          <input
+            type="email"
+            placeholder="enter email"
+            id="email"
+            name="email"
+            required
+          />
+          <input
+            type="text"
+            placeholder="enter phone number"
+            name="phone"
+            id="phone"
+            required
+          />
+
+          <input
+            type="text"
+            id="pics"
+            placeholder="enter image url"
+            name="pics"
+            required
+          />
+          <button class="btn btn-edt no-round" onclick="addNewUser()">
+            Add User</button
+          ><button class="btn btn-pry no-round" onclick="updateUser()">
+            Edit User
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="container">
+      <div>
+        <h1>User details section</h1>
+      </div>
+      <div class="user-container" id="users"></div>
+    </div>
+    <script src="./array.js"></script>
+  </body>
+</html>

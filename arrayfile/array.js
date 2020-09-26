@@ -1,114 +1,134 @@
-// prevent window reload
-document
-  .getElementById("submitUserForm")
-  .addEventListener("click", function (e) {
-    //prevent window reload
-    e.preventDefault();
-  });
-// ends here
-
-/**
- * variable definition
- */
 var today = new Date();
-var userName = document.getElementById("name");
-var email = document.getElementById("email");
-var phone = document.getElementById("phone");
-var image = document.getElementById("image");
-// ends here
+/**
+ * displays user table
+ */
+function displayUsers() {
+  userCard = "";
+  users = JSON.parse(localStorage.getItem("users"));
+  if (users == null) {
+    users = [];
+  }
 
-// defined user table
-let userTable = [
-  {
-    fullName: "Maxwell Diogu",
-    profilePic: "./me.jpg",
-    email: "justtoday@gmail.com",
-    phone: "+234816579824",
-    dateAdded: `${today.toDateString()}`,
-  },
-];
+  for (i = 0; i < users.length; i++) {
+    userCard += `
+    <div class="card" id="${i}">
+      <div class="card-img"><img src="${userCard[i].pics}" alt="Image of ${userCard[i].userName}" width="600" height="400"/></div>
+      <div class="card-body">
+        <h2> ${userCard[i].userName}</h2>
+        <p>Email: ${userCard[i].email}</p>
+        <p style="text-align: right" id="date">Added on: ${userCard[i].dateAdded}</p>
+      </div>
+      <div class="overlay">
+        <button class="btn btn-edt" onclick="toggleEditProfile(${i})" onclick="editProfile()">Edit</button>
+        <button class="btn btn-del" onclick="deleteProfile(${i})">
+          Delete
+        </button>
+      </div>
+      
+    </div>
+  `;
+  }
 
-// form controls start
-// display form
-var inputForm = document.getElementById("submitForm");
-const toggleUser = () => {
-  inputForm.style.display = "flex";
-};
-// close form
-const cancelOps = () => {
-  inputForm.style.display = "none";
-};
-// forms control ends
+  document.getElementById("users").innerHTML = userCard;
+}
 
 /**
- * display user cards
+ * adds new user to table
  */
-const displayProfileCards = () => {
-  var showUser = "";
-  for (let i = 0; i < userTable.length; i++) {
-    showUser = `
-            <div class="card" id="${i}">
-              <div class="card-img"><img src="${userTable[i].profilePic}" alt="Image of ${userTable[i].fullName}" width="600" height="400"/></div>
-              <div class="card-body">
-                <h2> ${userTable[i].fullName}</h2>
-                <p>Email: ${userTable[i].email}</p>
-                <p>Phone: ${userTable[i].phone}</p>
-                <p style="text-align: right" id="date">Added on: ${userTable[i].dateAdded}</p>
-              </div>
-              <div class="overlay">
-                <button class="btn btn-edt" onclick="editProfile(${i})">Edit</button>
-                <button class="btn btn-del" onclick="deleteProfile(${i})">
-                  Delete
-                </button>
-              </div>
-              
-            </div>
-          `;
-  }
-  // output cards to browser
-  document.getElementById("displayCard").innerHTML = showUser;
-  console.log(userTable);
-};
-
-const editProfile = (id) => {
-  userTable[id].fullName = userName.value;
-  userTable[id].email = email.value;
-  userTable[id].phone = phone.value;
-  userTable[id].profilePic = image.value;
-
+function addNewUser() {
   let newUser = {
-    fullName: userName.value,
-    profilePic: `./${image.value}`,
-    email: email.value,
-    phone: phone.value,
+    fullName: document.getElementById("fullname").value,
+    email: document.getElementById("email").value,
+    phone: document.getElementById("phone").value,
+    pics: document.getElementById("pics").value,
     dateAdded: `${today.toDateString()}`,
   };
 
-  userTable[id] = newUser;
-  displayProfileCards();
-};
+  if (
+    document.getElementById("index").value != "" ||
+    newUser.fullName == "" ||
+    newUser.email == "" ||
+    newUser.phone == "" ||
+    newUser.pics == ""
+  ) {
+    alert("Enter real values");
+  } else {
+    alert(`Welcome ${newUser.fullName}`);
+    users.push(newUser);
+    localStorage.setItem("users", JSON.stringify(users));
+    document.getElementById("index").value = "";
+    document.getElementById("fullname").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("pics").value = "";
 
-const deleteProfile = (id) => {
-  runCheck = confirm(`You are about to delete ${userTable[id].fullName}?`);
-  if (runCheck) {
-    userTable.splice(id, 1);
+    displayUsers();
   }
-  displayProfileCards();
-};
+}
 
-const addProfile = () => {
-  var newUser = {
-    fullName: userName.value,
-    profilePic: image.value,
-    email: email.value,
-    phone: phone.value,
-    dateAdded: `${today.toDateString()}`,
+/**
+ * deletes user from table
+ * @param {string} id
+ */
+function deleteUser(id) {
+  users = JSON.parse(localStorage.getItem("users"));
+  users.splice(id, 1);
+  localStorage.setItem("users", JSON.stringify(users));
+  displayUsers();
+}
+
+/**
+ * Edits user in table
+ * @param {string} id
+ */
+function editUser(id) {
+  users = JSON.parse(localStorage.getItem("users"));
+
+  // assign values
+  document.getElementById("index").value = id;
+  document.getElementById("fullname").value = users[id].fullName;
+  document.getElementById("email").value = users[id].email;
+  document.getElementById("phone").value = users[id].phone;
+  document.getElementById("pics").value = users[id].pics;
+}
+
+/**
+ * updats already existing user
+ */
+function updateUser() {
+  let userEditted = {
+    fullName: document.getElementById("fullname").value,
+    email: document.getElementById("email").value,
+    phone: document.getElementById("phone").value,
+    pics: document.getElementById("pics").value,
   };
-  alert(JSON.stringify(image));
 
-  userTable.push(newUser);
-  displayProfileCards();
-};
+  // check for valid input
+  if (
+    document.getElementById("index").value == "" ||
+    userEditted.fullName == "" ||
+    userEditted.email == "" ||
+    userEditted.phone == "" ||
+    userEditted.pics == ""
+  ) {
+    alert("Enter valid inputs");
+  } else {
+    users = JSON.parse(localStorage.getItem("users"));
+    users[document.getElementById("index").value] = userEditted;
+    localStorage.setItem("users", JSON.stringify(users));
 
-// initial display
-displayProfileCards();
+    document.getElementById("index").value = "";
+    document.getElementById("fullname").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("pics").value = "";
+
+    displayUsers();
+  }
+}
+
+// // with localstorage,
+
+// delete item, delete all
+
+addEventListener("DOMContentLoaded", displayUsers);
